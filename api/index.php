@@ -15,6 +15,8 @@ $db->bootEloquent();             /* établir la connexion */
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \projet\controller\ControllerMembre;
+use \projet\controller\ControllerStream;
+use \projet\controller\ControllerMessage;
 $container = new \Slim\Container(array_merge($config_slim, $errors));
 $app = new \Slim\App($container);
 
@@ -23,27 +25,29 @@ $app = new \Slim\App($container);
     $res->getBody()->write("<h1>Salut</h1>");
     return $res;
 });*/
-// ****************************** ROUTES ******************************
+// ****************************** ROUTES DE TEST ******************************
 $app->get('/test[/]',ControllerMembre::class.':test');
-$app->get("/home", function (Request $rq, Response $resp): Response {
-});
+$app->get("/home[/]", ControllerStream::class.':home');
+////////////////////////////////////////////////////////////////////////////////////
 
 // MEMBRE
-$app->get("/member/{id}", function (Request $rq, Response $resp): Response {
-});
+$app->get("/member/{id}", ControllerMembre::class.':getMember');
 
-$app->post("/member", function (Request $rq, Response $resp): Response {
-});
+$app->post("/member", ControllerMember::class.':createMember');
 
 // VIDEOS
 
-$app->get("/video", function (Request $rq, Response $resp): Response {
+/*$app->get("/video", function (Request $rq, Response $resp): Response {
 });
 
 $app->get("/subs", function (Request $rq, Response $resp): Response {
 });
 
 $app->get("/msg", function (Request $rq, Response $resp): Response {
-});
+});*/
 
+//MESSAGE
+$app->get("/msg", ControllerMessage::class.':getMessages');
+//$app->post('/msg', ControllerMessage::class.':sendMessage');
+$app->delete('/msg', ControllerMessage::class.':deleteMessage');
 $app->run();
