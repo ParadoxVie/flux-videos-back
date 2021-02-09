@@ -14,7 +14,7 @@ $db->setAsGlobal();              /* rendre la connexion visible dans tout le pro
 $db->bootEloquent();             /* établir la connexion */
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-use \projet\controller\ControllerMembre;
+use \projet\controller\ControllerUser;
 use \projet\controller\ControllerStream;
 use \projet\controller\ControllerMessage;
 $container = new \Slim\Container(array_merge($config_slim, $errors));
@@ -25,15 +25,20 @@ $app = new \Slim\App($container);
     $res->getBody()->write("<h1>Salut</h1>");
     return $res;
 });*/
-// ****************************** ROUTES DE TEST ******************************
-$app->get('/test[/]',ControllerMembre::class.':test');
+// ****************************** ROUTES *****************************************
 $app->get("/home[/]", ControllerStream::class.':home');
-////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 
 // MEMBRE
-$app->get("/member/{id}", ControllerMembre::class.':getMember');
+$app->get("/user/{id}", ControllerUser::class.':getUser');
 
-$app->post("/member", ControllerMember::class.':createMember');
+$app->put("/user/{id}", ControllerUser::class.':modifProfile');
+
+$app->post("/user", ControllerUser::class.':createMember');
+
+$app->delete("/user", ControllerUser::class.':deleteMember');
+
+$app->post("/signIn", ControllerUser::class.':signIn');
 
 // VIDEOS
 
@@ -48,6 +53,9 @@ $app->get("/msg", function (Request $rq, Response $resp): Response {
 
 //MESSAGE
 $app->get("/msg", ControllerMessage::class.':getMessages');
-//$app->post('/msg', ControllerMessage::class.':sendMessage');
+
+$app->post('/msg', ControllerMessage::class.':sendMessage');
+
 $app->delete('/msg', ControllerMessage::class.':deleteMessage');
+
 $app->run();

@@ -1,6 +1,6 @@
 <?php
 
-namespace src\model;
+namespace projet\model;
 
 class User extends \Illuminate\Database\Eloquent\Model {
     protected $table = 'user';

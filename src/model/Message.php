@@ -1,6 +1,6 @@
 <?php
 
-namespace src\model;
+namespace projet\model;
 
 class Message extends \Illuminate\Database\Eloquent\Model {
     protected $table = 'message';

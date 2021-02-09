@@ -2,7 +2,7 @@
 namespace projet\controller;
 use\Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-use \projet\model\User;
+use \projet\model\Message;
 class ControllerMessage
 {
     protected $c;
@@ -21,11 +21,12 @@ class ControllerMessage
 
     public function sendMessage(Request $req, Response $res, array $args): Response
     {
-
+        $msg = json_decode($req->getBody());
+        $message = new Message();
     }
 
     public function deleteMessage(Request $req, Response $res, array $args): Response
     {
-
+        $message = Message::where('id','=',$id)->first();
     }
 }

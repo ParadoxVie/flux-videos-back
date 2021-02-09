@@ -1,6 +1,6 @@
 <?php
 
-namespace src\model;
+namespace projet\model;
 
 class Notification extends \Illuminate\Database\Eloquent\Model {
     protected $table = 'notfication';

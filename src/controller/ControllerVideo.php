@@ -18,8 +18,9 @@ class ControllerVideo
 
     public function getVideo(Request $req, Response $res, array $args): Response
     {
-        
+            
     }
+
     public function sendVideo(Request $req, Response $res): Response
     {
 

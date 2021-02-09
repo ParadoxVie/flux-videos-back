@@ -1,6 +1,6 @@
 <?php
 
-namespace src\model;
+namespace projet\model;
 
 class Subscribe extends \Illuminate\Database\Eloquent\Model {
     protected $table = 'subscribe';
