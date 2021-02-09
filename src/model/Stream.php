@@ -1,0 +1,9 @@
+<?php
+
+namespace src\model;
+
+class Stream extends \Illuminate\Database\Eloquent\Model {
+    protected $table = 'stream';
+    protected $primaryKey = 'id';
+    public    $timestamps = true;
+}
