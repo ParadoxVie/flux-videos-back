@@ -17,9 +17,34 @@ use \Psr\Http\Message\ResponseInterface as Response;
 use \projet\controller\ControllerUser;
 use \projet\controller\ControllerStream;
 use \projet\controller\ControllerMessage;
+function cors() {
+    // Allow from any origin
+    if (isset($_SERVER['HTTP_ORIGIN'])) {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Origin, Authorization, X-Requested-With, Content-Type, Accept");
+        header('Access-Control-Allow-Credentials: true');
+        header('Access-Control-Max-Age: 86400');    // cache for 1 day
+    }
+
+    // Access-Control headers are received during OPTIONS requests
+    if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+
+        if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
+            // may also be using PUT, PATCH, HEAD etc
+            header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
+
+        if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
+            header("Access-Control-Allow-Headers: Origin, Authorization, X-Requested-With, Content-Type, Accept");
+
+        exit(0);
+    }
+}
+cors();
+
+
 $container = new \Slim\Container(array_merge($config_slim, $errors));
 $app = new \Slim\App($container);
-
 /*$app->get('/test[/]',function(Request $req, Response $res, array $args) : Response
 {
     $res->getBody()->write("<h1>Salut</h1>");
@@ -34,12 +59,18 @@ $app->get("/user/{id}", ControllerUser::class.':getUser');
 
 $app->put("/user/{id}", ControllerUser::class.':modifProfile');
 
-$app->post("/user", ControllerUser::class.':createMember');
+$app->post("/user", ControllerUser::class.':createUser');
 
-$app->delete("/user", ControllerUser::class.':deleteMember');
+$app->delete("/user", ControllerUser::class.':deleteUser');
 
 $app->post("/signIn", ControllerUser::class.':signIn');
 
+// STREAM
+$app->get('/alert[/]', ControllerStream::class.':voirStreamProche');
+
+$app->get("/stream/{id}[/]", ControllerStream::class.':getStream');
+
+$app->post('/stream', ControllerStream::class,':createStream');
 // VIDEOS
 
 /*$app->get("/video", function (Request $rq, Response $resp): Response {
