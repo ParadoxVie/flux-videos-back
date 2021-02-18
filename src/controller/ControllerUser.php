@@ -92,10 +92,10 @@ class ControllerUser
 
     public function signIn(Request $req, Response $res,array $args): Response
     {
-        $body = $req->getBody();
+        $body = json_decode($req->getBody());
         try
         {
-            $user = User::where('pseudo','=',$req->getBody()->username)->firstorFail();
+            $user = User::where('username','=',$body->username)->firstorFail();
         }
         catch(\Exception $e)
         {

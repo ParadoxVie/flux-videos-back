@@ -63,7 +63,7 @@ $app->post("/user", ControllerUser::class.':createUser');
 
 $app->delete("/user", ControllerUser::class.':deleteUser');
 
-$app->post("/signIn", ControllerUser::class.':signIn');
+$app->post("/signin", ControllerUser::class.':signIn');
 
 // STREAM
 $app->get('/alert[/]', ControllerStream::class.':voirStreamProche');
