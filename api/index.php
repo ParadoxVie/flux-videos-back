@@ -70,7 +70,7 @@ $app->get('/alert[/]', ControllerStream::class.':voirStreamProche');
 
 $app->get("/stream/{id}[/]", ControllerStream::class.':getStream');
 
-$app->post('/stream', ControllerStream::class,':createStream');
+$app->post('/stream', ControllerStream::class.':createStream');
 // VIDEOS
 
 /*$app->get("/video", function (Request $rq, Response $resp): Response {

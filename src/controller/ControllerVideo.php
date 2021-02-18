@@ -2,6 +2,7 @@
 namespace projet\controller;
 use\Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use \projet\model\Video;
 class ControllerVideo
 {
     protected $c;
@@ -33,6 +34,21 @@ class ControllerVideo
 
     public function deleteVideo(Request $req, Response $res, array $args): Response
     {
-
+        $video = Video::where('id','=',$id)->first();
+        try
+        {
+            $user->delete();
+        }
+        catch(\Exception $e)
+        {
+            $res = $res->withStatus(500)
+                        ->withHeader('Content-Type','application/json');
+            $res->getBody()->write(json_encode($e->getmessage()));
+            return $res;
+        }
+        $res = $res->withStatus(200)                     
+                    ->withHeader('Content-Type','application/json');
+        $res->getBody()->write(json_encode("Video deleted"));
+        return $res;
     }
 }

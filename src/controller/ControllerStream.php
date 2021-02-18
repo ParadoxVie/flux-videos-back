@@ -64,24 +64,19 @@ class ControllerStream
         //Proxy
         /*$opts = array('http' => array('proxy'=> 'tcp://www-cache.iutnc.univ-lorraine.fr:3128', 'request_fulluri'=> true));
         $context = stream_context_create($opts)*/
-        $token = $req->getQueryParam('token',null);
+        //$token = $req->getQueryParam('token',null);
         $uuid1 = Uuid::uuid1();
-        $str = file_get_contents("http://ip-api.com/json");
+        $str = json_decode(file_get_contents("http://ip-api.com/json"));
         $stream = new Stream();
         $infos = json_decode($req->getBody());//Recuperation des infos
-        $stream->title = $infos['title'];
-        $stream->visibility = $infos['visibility'];
-        $stream->mode = $infos['mode'];
+        $stream->id = $uuid1;
+        $stream->title = $infos->title;
+        $stream->visibility = $infos->visibility;
+        $stream->anonymous = $infos->anonymous;
+        $stream->urgency = $infos->urgency;
         $stream->latitude = $str->lat;
         $stream->longitude = $str->lon;
-        if(isset($token))
-        {
-            $stream->id_user = 1;
-        }
-        else
-        {
-            $stream->id_user = $uuid1;
-        }
+        $stream->id_user = 1;
 
         try
         {
@@ -89,7 +84,10 @@ class ControllerStream
         }
         catch(\Exception $e)
         {
-            echo $e->getMessage();
+            $res = $res->withStatus(500)
+                        ->withHeader('Content-Type','application/json');
+            $res->getBody()->write(json_encode($e->getmessage()));
+            return $res;
         }
         
         $res = $res->withStatus(201)                     
