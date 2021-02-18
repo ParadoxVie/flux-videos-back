@@ -23,6 +23,21 @@ class ControllerMessage
     {
         $msg = json_decode($req->getBody());
         $message = new Message();
+        try
+        {
+            $message->save();
+        }
+        catch(\Exception $e)
+        {
+            $res = $res->withStatus(500)
+                        ->withHeader('Content-Type','application/json');
+            $res->getBody()->write(json_encode($e->getmessage()));
+            return $res;
+        }
+        $res = $res->withStatus(201)                     
+                    ->withHeader('Content-Type','application/json');
+        $res->getBody()->write(json_encode("Message Envoyé"));
+        return $res;
     }
 
     public function deleteMessage(Request $req, Response $res, array $args): Response
