@@ -27,7 +27,7 @@ class ControllerUser
         {
             $res = $res->withStatus(404)                     
                         ->withHeader('Content-Type','application/json');
-            $res->getBody()->write("User Not Found");
+            $res->getBody()->write(json_encode("User Not Found"));
             return $res;
         }
     }
@@ -41,8 +41,8 @@ class ControllerUser
         $user->mail = $body->mail;
         $user->username = $body->username;
         $user->password = password_hash($body->password,PASSWORD_DEFAULT);
-        $user->description = '';//$body['description'];
-        $user->image = '';//$body['image'];
+        $user->description = '';
+        $user->image = '';
         try
         {
             $user->save();
@@ -73,7 +73,21 @@ class ControllerUser
     public function deleteMember(Request $req, Response $res,array $args): Response
     {
         $user = User::where('id','=',$id)->first();
-        $user->delete();
+        try
+        {
+            $user->delete();
+        }
+        catch(\Exception $e)
+        {
+            $res = $res->withStatus(500)
+                        ->withHeader('Content-Type','application/json');
+            $res->getBody()->write(json_encode($e->getmessage()));
+            return $res;
+        }
+        $res = $res->withStatus(200)                     
+                    ->withHeader('Content-Type','application/json');
+        $res->getBody()->write(json_encode("User deleted"));
+        return $res;
     }
 
     public function signIn(Request $req, Response $res,array $args): Response

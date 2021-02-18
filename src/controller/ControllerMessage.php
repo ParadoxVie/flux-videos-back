@@ -28,5 +28,20 @@ class ControllerMessage
     public function deleteMessage(Request $req, Response $res, array $args): Response
     {
         $message = Message::where('id','=',$id)->first();
+        try
+        {
+            $message->delete();
+        }
+        catch(\Exception $e)
+        {
+            $res = $res->withStatus(500)
+                        ->withHeader('Content-Type','application/json');
+            $res->getBody()->write(json_encode($e->getmessage()));
+            return $res;
+        }
+        $res = $res->withStatus(200)                     
+                    ->withHeader('Content-Type','application/json');
+        $res->getBody()->write(json_encode("Message supprimé"));
+        return $res;
     }
 }

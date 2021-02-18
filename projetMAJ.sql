@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le : mar. 09 fév. 2021 à 13:37
--- Version du serveur :  5.7.31
--- Version de PHP : 7.3.21
+-- Hôte : localhost
+-- Généré le : mer. 17 fév. 2021 à 14:09
+-- Version du serveur :  8.0.22
+-- Version de PHP : 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `project`
+-- Base de données : `projet`
 --
 
 -- --------------------------------------------------------
@@ -27,124 +27,120 @@ SET time_zone = "+00:00";
 -- Structure de la table `message`
 --
 
-DROP TABLE IF EXISTS `message`;
-CREATE TABLE IF NOT EXISTS `message` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `message` (
+  `id` int NOT NULL,
   `text` varchar(80) NOT NULL,
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_stream` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk1_message_user` (`id_user`),
-  KEY `fk2_message_stream` (`id_stream`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
+  `id_user` int NOT NULL,
+  `id_stream` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `message`
 --
 
 INSERT INTO `message` (`id`, `text`, `created_at`, `updated_at`, `id_user`, `id_stream`) VALUES
-(1, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 100, 1),
-(2, 'Lorem ipsum dolor sit amet, consectetuer', '0000-00-00 00:00:00', NULL, 99, 1),
-(3, 'Lorem ipsum dolor sit amet, consectetuer', '0000-00-00 00:00:00', NULL, 98, 1),
-(4, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 97, 1),
-(5, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', '0000-00-00 00:00:00', NULL, 96, 1),
-(6, 'Lorem ipsum dolor sit amet, consectetuer adipiscing', '0000-00-00 00:00:00', NULL, 95, 1),
-(7, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 94, 1),
-(8, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor.', '0000-00-00 00:00:00', NULL, 93, 8),
-(9, 'Lorem', '0000-00-00 00:00:00', NULL, 92, 9),
-(10, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 91, 10),
-(11, 'Lorem ipsum dolor', '0000-00-00 00:00:00', NULL, 90, 11),
-(12, 'Lorem ipsum dolor sit', '0000-00-00 00:00:00', NULL, 89, 12),
-(13, 'Lorem', '0000-00-00 00:00:00', NULL, 88, 13),
-(14, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 87, 14),
-(15, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', '0000-00-00 00:00:00', NULL, 86, 15),
-(16, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 85, 16),
-(17, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 84, 17),
-(18, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', '0000-00-00 00:00:00', NULL, 83, 18),
-(19, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 82, 19),
-(20, 'Lorem ipsum dolor sit amet,', '0000-00-00 00:00:00', NULL, 81, 20),
-(21, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', '0000-00-00 00:00:00', NULL, 80, 21),
-(22, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 79, 22),
-(23, 'Lorem ipsum dolor sit amet, consectetuer adipiscing', '0000-00-00 00:00:00', NULL, 78, 23),
-(24, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor.', '0000-00-00 00:00:00', NULL, 77, 24),
-(25, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor.', '0000-00-00 00:00:00', NULL, 76, 25),
-(26, 'Lorem ipsum', '0000-00-00 00:00:00', NULL, 75, 26),
-(27, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 74, 27),
-(28, 'Lorem', '0000-00-00 00:00:00', NULL, 73, 28),
-(29, 'Lorem ipsum dolor sit amet,', '0000-00-00 00:00:00', NULL, 72, 29),
-(30, 'Lorem ipsum dolor sit', '0000-00-00 00:00:00', NULL, 71, 30),
-(31, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', '0000-00-00 00:00:00', NULL, 70, 31),
-(32, 'Lorem ipsum dolor sit amet,', '2016-03-06 21:31:00', NULL, 69, 32),
-(33, 'Lorem ipsum dolor sit amet, consectetuer', '0000-00-00 00:00:00', NULL, 68, 33),
-(34, 'Lorem ipsum', '0000-00-00 00:00:00', NULL, 67, 34),
-(35, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', '0000-00-00 00:00:00', NULL, 66, 35),
-(36, 'Lorem ipsum dolor sit amet,', '0000-00-00 00:00:00', NULL, 65, 36),
-(37, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 64, 37),
-(38, 'Lorem ipsum dolor sit amet,', '0000-00-00 00:00:00', NULL, 63, 38),
-(39, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 62, 39),
-(40, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', '0000-00-00 00:00:00', NULL, 61, 40),
-(41, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', '0000-00-00 00:00:00', NULL, 60, 41),
-(42, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', '0000-00-00 00:00:00', NULL, 59, 42),
-(43, 'Lorem ipsum dolor', '0000-00-00 00:00:00', NULL, 58, 43),
-(44, 'Lorem', '0000-00-00 00:00:00', NULL, 57, 44),
-(45, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 56, 45),
-(46, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 55, 46),
-(47, 'Lorem', '0000-00-00 00:00:00', NULL, 54, 47),
-(48, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', '0000-00-00 00:00:00', NULL, 53, 48),
-(49, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 52, 49),
-(50, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 51, 50),
-(51, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 50, 51),
-(52, 'Lorem ipsum', '0000-00-00 00:00:00', NULL, 49, 52),
-(53, 'Lorem ipsum dolor sit amet, consectetuer', '0000-00-00 00:00:00', NULL, 48, 53),
-(54, 'Lorem', '0000-00-00 00:00:00', NULL, 47, 54),
-(55, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 46, 55),
-(56, 'Lorem ipsum dolor sit amet, consectetuer adipiscing', '0000-00-00 00:00:00', NULL, 45, 56),
-(57, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 44, 57),
-(58, 'Lorem ipsum dolor sit amet,', '0000-00-00 00:00:00', NULL, 43, 58),
-(59, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor.', '0000-00-00 00:00:00', NULL, 42, 59),
-(60, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', '0000-00-00 00:00:00', NULL, 41, 60),
-(61, 'Lorem ipsum dolor sit amet, consectetuer adipiscing', '0000-00-00 00:00:00', NULL, 40, 61),
-(62, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', '0000-00-00 00:00:00', NULL, 39, 62),
-(63, 'Lorem', '0000-00-00 00:00:00', NULL, 38, 63),
-(64, 'Lorem ipsum', '0000-00-00 00:00:00', NULL, 37, 64),
-(65, 'Lorem', '0000-00-00 00:00:00', NULL, 36, 65),
-(66, 'Lorem', '0000-00-00 00:00:00', NULL, 35, 66),
-(67, 'Lorem', '0000-00-00 00:00:00', NULL, 34, 67),
-(68, 'Lorem ipsum dolor sit', '0000-00-00 00:00:00', NULL, 33, 68),
-(69, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 32, 69),
-(70, 'Lorem ipsum dolor sit', '0000-00-00 00:00:00', NULL, 31, 70),
-(71, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor.', '0000-00-00 00:00:00', NULL, 30, 71),
-(72, 'Lorem ipsum dolor sit amet,', '0000-00-00 00:00:00', NULL, 29, 72),
-(73, 'Lorem ipsum dolor sit amet, consectetuer adipiscing', '0000-00-00 00:00:00', NULL, 28, 73),
-(74, 'Lorem ipsum', '0000-00-00 00:00:00', NULL, 27, 74),
-(75, 'Lorem ipsum dolor sit amet, consectetuer adipiscing', '0000-00-00 00:00:00', NULL, 26, 75),
-(76, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 25, 76),
-(77, 'Lorem ipsum', '0000-00-00 00:00:00', NULL, 24, 77),
-(78, 'Lorem ipsum dolor sit amet, consectetuer', '0000-00-00 00:00:00', NULL, 23, 78),
-(79, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 22, 79),
-(80, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 21, 80),
-(81, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', '0000-00-00 00:00:00', NULL, 20, 81),
-(82, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 19, 82),
-(83, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 18, 83),
-(84, 'Lorem', '0000-00-00 00:00:00', NULL, 17, 84),
-(85, 'Lorem ipsum dolor', '0000-00-00 00:00:00', NULL, 16, 85),
-(86, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 15, 86),
-(87, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor.', '0000-00-00 00:00:00', NULL, 14, 87),
-(88, 'Lorem ipsum dolor sit amet, consectetuer adipiscing', '0000-00-00 00:00:00', NULL, 13, 88),
-(89, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 12, 89),
-(90, 'Lorem ipsum dolor sit amet, consectetuer adipiscing', '0000-00-00 00:00:00', NULL, 11, 90),
-(91, 'Lorem ipsum dolor sit amet,', '0000-00-00 00:00:00', NULL, 10, 91),
-(92, 'Lorem ipsum dolor', '0000-00-00 00:00:00', NULL, 9, 92),
-(93, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 8, 93),
-(94, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 7, 94),
-(95, 'Lorem ipsum dolor sit', '0000-00-00 00:00:00', NULL, 6, 95),
-(96, 'Lorem ipsum dolor', '0000-00-00 00:00:00', NULL, 5, 96),
-(97, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', '0000-00-00 00:00:00', NULL, 4, 97),
-(98, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 3, 98),
-(99, 'Lorem ipsum dolor sit amet, consectetuer', '0000-00-00 00:00:00', NULL, 2, 99),
-(100, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 1, 100);
+(1, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 100, '1'),
+(2, 'Lorem ipsum dolor sit amet, consectetuer', '0000-00-00 00:00:00', NULL, 99, '1'),
+(3, 'Lorem ipsum dolor sit amet, consectetuer', '0000-00-00 00:00:00', NULL, 98, '1'),
+(4, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 97, '1'),
+(5, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', '0000-00-00 00:00:00', NULL, 96, '1'),
+(6, 'Lorem ipsum dolor sit amet, consectetuer adipiscing', '0000-00-00 00:00:00', NULL, 95, '1'),
+(7, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 94, '1'),
+(8, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor.', '0000-00-00 00:00:00', NULL, 93, '8'),
+(9, 'Lorem', '0000-00-00 00:00:00', NULL, 92, '9'),
+(10, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 91, '10'),
+(11, 'Lorem ipsum dolor', '0000-00-00 00:00:00', NULL, 90, '11'),
+(12, 'Lorem ipsum dolor sit', '0000-00-00 00:00:00', NULL, 89, '12'),
+(13, 'Lorem', '0000-00-00 00:00:00', NULL, 88, '13'),
+(14, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 87, '14'),
+(15, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', '0000-00-00 00:00:00', NULL, 86, '15'),
+(16, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 85, '16'),
+(17, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 84, '17'),
+(18, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', '0000-00-00 00:00:00', NULL, 83, '18'),
+(19, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 82, '19'),
+(20, 'Lorem ipsum dolor sit amet,', '0000-00-00 00:00:00', NULL, 81, '20'),
+(21, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', '0000-00-00 00:00:00', NULL, 80, '21'),
+(22, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 79, '22'),
+(23, 'Lorem ipsum dolor sit amet, consectetuer adipiscing', '0000-00-00 00:00:00', NULL, 78, '23'),
+(24, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor.', '0000-00-00 00:00:00', NULL, 77, '24'),
+(25, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor.', '0000-00-00 00:00:00', NULL, 76, '25'),
+(26, 'Lorem ipsum', '0000-00-00 00:00:00', NULL, 75, '26'),
+(27, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 74, '27'),
+(28, 'Lorem', '0000-00-00 00:00:00', NULL, 73, '28'),
+(29, 'Lorem ipsum dolor sit amet,', '0000-00-00 00:00:00', NULL, 72, '29'),
+(30, 'Lorem ipsum dolor sit', '0000-00-00 00:00:00', NULL, 71, '30'),
+(31, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', '0000-00-00 00:00:00', NULL, 70, '31'),
+(32, 'Lorem ipsum dolor sit amet,', '2016-03-06 21:31:00', NULL, 69, '32'),
+(33, 'Lorem ipsum dolor sit amet, consectetuer', '0000-00-00 00:00:00', NULL, 68, '33'),
+(34, 'Lorem ipsum', '0000-00-00 00:00:00', NULL, 67, '34'),
+(35, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', '0000-00-00 00:00:00', NULL, 66, '35'),
+(36, 'Lorem ipsum dolor sit amet,', '0000-00-00 00:00:00', NULL, 65, '36'),
+(37, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 64, '37'),
+(38, 'Lorem ipsum dolor sit amet,', '0000-00-00 00:00:00', NULL, 63, '38'),
+(39, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 62, '39'),
+(40, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', '0000-00-00 00:00:00', NULL, 61, '40'),
+(41, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', '0000-00-00 00:00:00', NULL, 60, '41'),
+(42, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', '0000-00-00 00:00:00', NULL, 59, '42'),
+(43, 'Lorem ipsum dolor', '0000-00-00 00:00:00', NULL, 58, '43'),
+(44, 'Lorem', '0000-00-00 00:00:00', NULL, 57, '44'),
+(45, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 56, '45'),
+(46, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 55, '46'),
+(47, 'Lorem', '0000-00-00 00:00:00', NULL, 54, '47'),
+(48, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', '0000-00-00 00:00:00', NULL, 53, '48'),
+(49, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 52, '49'),
+(50, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 51, '50'),
+(51, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 50, '51'),
+(52, 'Lorem ipsum', '0000-00-00 00:00:00', NULL, 49, '52'),
+(53, 'Lorem ipsum dolor sit amet, consectetuer', '0000-00-00 00:00:00', NULL, 48, '53'),
+(54, 'Lorem', '0000-00-00 00:00:00', NULL, 47, '54'),
+(55, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 46, '55'),
+(56, 'Lorem ipsum dolor sit amet, consectetuer adipiscing', '0000-00-00 00:00:00', NULL, 45, '56'),
+(57, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 44, '57'),
+(58, 'Lorem ipsum dolor sit amet,', '0000-00-00 00:00:00', NULL, 43, '58'),
+(59, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor.', '0000-00-00 00:00:00', NULL, 42, '59'),
+(60, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', '0000-00-00 00:00:00', NULL, 41, '60'),
+(61, 'Lorem ipsum dolor sit amet, consectetuer adipiscing', '0000-00-00 00:00:00', NULL, 40, '61'),
+(62, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', '0000-00-00 00:00:00', NULL, 39, '62'),
+(63, 'Lorem', '0000-00-00 00:00:00', NULL, 38, '63'),
+(64, 'Lorem ipsum', '0000-00-00 00:00:00', NULL, 37, '64'),
+(65, 'Lorem', '0000-00-00 00:00:00', NULL, 36, '65'),
+(66, 'Lorem', '0000-00-00 00:00:00', NULL, 35, '66'),
+(67, 'Lorem', '0000-00-00 00:00:00', NULL, 34, '67'),
+(68, 'Lorem ipsum dolor sit', '0000-00-00 00:00:00', NULL, 33, '68'),
+(69, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 32, '69'),
+(70, 'Lorem ipsum dolor sit', '0000-00-00 00:00:00', NULL, 31, '70'),
+(71, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor.', '0000-00-00 00:00:00', NULL, 30, '71'),
+(72, 'Lorem ipsum dolor sit amet,', '0000-00-00 00:00:00', NULL, 29, '72'),
+(73, 'Lorem ipsum dolor sit amet, consectetuer adipiscing', '0000-00-00 00:00:00', NULL, 28, '73'),
+(74, 'Lorem ipsum', '0000-00-00 00:00:00', NULL, 27, '74'),
+(75, 'Lorem ipsum dolor sit amet, consectetuer adipiscing', '0000-00-00 00:00:00', NULL, 26, '75'),
+(76, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 25, '76'),
+(77, 'Lorem ipsum', '0000-00-00 00:00:00', NULL, 24, '77'),
+(78, 'Lorem ipsum dolor sit amet, consectetuer', '0000-00-00 00:00:00', NULL, 23, '78'),
+(79, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 22, '79'),
+(80, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 21, '80'),
+(81, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', '0000-00-00 00:00:00', NULL, 20, '81'),
+(82, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 19, '82'),
+(83, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 18, '83'),
+(84, 'Lorem', '0000-00-00 00:00:00', NULL, 17, '84'),
+(85, 'Lorem ipsum dolor', '0000-00-00 00:00:00', NULL, 16, '85'),
+(86, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 15, '86'),
+(87, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor.', '0000-00-00 00:00:00', NULL, 14, '87'),
+(88, 'Lorem ipsum dolor sit amet, consectetuer adipiscing', '0000-00-00 00:00:00', NULL, 13, '88'),
+(89, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 12, '89'),
+(90, 'Lorem ipsum dolor sit amet, consectetuer adipiscing', '0000-00-00 00:00:00', NULL, 11, '90'),
+(91, 'Lorem ipsum dolor sit amet,', '0000-00-00 00:00:00', NULL, 10, '91'),
+(92, 'Lorem ipsum dolor', '0000-00-00 00:00:00', NULL, 9, '92'),
+(93, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 8, '93'),
+(94, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. ', '0000-00-00 00:00:00', NULL, 7, '94'),
+(95, 'Lorem ipsum dolor sit', '0000-00-00 00:00:00', NULL, 6, '95'),
+(96, 'Lorem ipsum dolor', '0000-00-00 00:00:00', NULL, 5, '96'),
+(97, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', '0000-00-00 00:00:00', NULL, 4, '97'),
+(98, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 3, '98'),
+(99, 'Lorem ipsum dolor sit amet, consectetuer', '0000-00-00 00:00:00', NULL, 2, '99'),
+(100, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', NULL, 1, '100');
 
 -- --------------------------------------------------------
 
@@ -152,13 +148,11 @@ INSERT INTO `message` (`id`, `text`, `created_at`, `updated_at`, `id_user`, `id_
 -- Structure de la table `notification`
 --
 
-DROP TABLE IF EXISTS `notification`;
-CREATE TABLE IF NOT EXISTS `notification` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `notification` (
+  `id` int NOT NULL,
   `text` varchar(80) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_sub` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_user` int NOT NULL,
+  `id_sub` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -167,19 +161,15 @@ CREATE TABLE IF NOT EXISTS `notification` (
 -- Structure de la table `private_message`
 --
 
-DROP TABLE IF EXISTS `private_message`;
-CREATE TABLE IF NOT EXISTS `private_message` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `private_message` (
+  `id` int NOT NULL,
   `text` varchar(100) NOT NULL,
-  `id_sender` int(11) NOT NULL,
-  `id_sendee` int(11) NOT NULL,
+  `id_sender` int NOT NULL,
+  `id_sendee` int NOT NULL,
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk1_private_sender` (`id_sender`),
-  KEY `fk1_private_sendee` (`id_sendee`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `private_message`
@@ -293,126 +283,125 @@ INSERT INTO `private_message` (`id`, `text`, `id_sender`, `id_sendee`, `created_
 -- Structure de la table `stream`
 --
 
-DROP TABLE IF EXISTS `stream`;
-CREATE TABLE IF NOT EXISTS `stream` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `stream` (
+  `id` varchar(128) NOT NULL,
   `title` varchar(50) NOT NULL,
-  `visibility` int(11) NOT NULL,
-  `mode` varchar(10) NOT NULL,
-  `created_at` timestamp NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `visibility` int NOT NULL,
+  `created_at` datetime NOT NULL,
+  `id_user` int NOT NULL,
   `latitude` float NOT NULL,
   `longitude` float NOT NULL,
-  `updated_at` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk1_stream_user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
+  `anonymous` tinyint(1) NOT NULL,
+  `urgency` tinyint(1) NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `stream`
 --
 
-INSERT INTO `stream` (`id`, `title`, `visibility`, `mode`, `created_at`, `id_user`, `latitude`, `longitude`, `updated_at`) VALUES
-(1, 'sed,', 1, 'elit pede,', '0000-00-00 00:00:00', 1, 10.8575, -114.248, NULL),
-(2, 'neque', 1, 'taciti soc', '0000-00-00 00:00:00', 2, 69.9342, 15.8724, NULL),
-(3, 'non', 0, 'ac mattis ', '0000-00-00 00:00:00', 3, -21.1202, 174.939, NULL),
-(4, 'Vivamus', 1, 'ante. Nunc', '0000-00-00 00:00:00', 4, -9.93099, 130.814, NULL),
-(5, 'velit.', 0, 'Donec port', '0000-00-00 00:00:00', 5, -62.6541, 144.978, NULL),
-(6, 'nonummy.', 1, 'tempor arc', '0000-00-00 00:00:00', 6, 0.3744, -126.067, NULL),
-(7, 'nec', 1, 'dictum cur', '0000-00-00 00:00:00', 7, 69.4355, 44.7591, NULL),
-(8, 'Cras', 1, 'consectetu', '0000-00-00 00:00:00', 8, -10.145, -13.8318, NULL),
-(9, 'magna', 0, 'Quisque po', '0000-00-00 00:00:00', 9, 71.6898, 52.9938, NULL),
-(10, 'neque', 0, 'nunc sit a', '0000-00-00 00:00:00', 10, -78.7383, -115.374, NULL),
-(11, 'amet', 0, 'Maecenas o', '0000-00-00 00:00:00', 11, -43.7868, 146.83, NULL),
-(12, 'et,', 0, 'ligula. Nu', '0000-00-00 00:00:00', 12, 22.5856, -21.14, NULL),
-(13, 'ac', 0, 'augue male', '0000-00-00 00:00:00', 13, -84.1767, -56.5906, NULL),
-(14, 'blandit', 1, 'sed leo. C', '0000-00-00 00:00:00', 14, 65.8672, 56.6343, NULL),
-(15, 'Vivamus', 1, 'sit amet l', '0000-00-00 00:00:00', 15, 64.4699, -107.274, NULL),
-(16, 'hendrerit', 1, 'Vivamus mo', '0000-00-00 00:00:00', 16, 83.9858, 128.42, NULL),
-(17, 'ac', 0, 'Vivamus no', '0000-00-00 00:00:00', 17, -3.21438, 117.076, NULL),
-(18, 'fermentum', 1, 'mi. Duis r', '0000-00-00 00:00:00', 18, 29.43, -19.3617, NULL),
-(19, 'Donec', 1, 'Nam ligula', '0000-00-00 00:00:00', 19, -60.3971, 9.72869, NULL),
-(20, 'Suspendisse', 0, 'nec urna e', '0000-00-00 00:00:00', 20, -58.5214, 118.151, NULL),
-(21, 'non', 0, 'faucibus o', '0000-00-00 00:00:00', 21, -35.882, -56.0997, NULL),
-(22, 'vestibulum', 0, 'blandit ma', '0000-00-00 00:00:00', 22, -51.8115, -115.173, NULL),
-(23, 'eu,', 0, 'amet risus', '0000-00-00 00:00:00', 23, 66.6208, 59.1048, NULL),
-(24, 'leo.', 1, 'eu odio tr', '0000-00-00 00:00:00', 24, 50.3232, -108.021, NULL),
-(25, 'mollis', 1, 'Aliquam or', '0000-00-00 00:00:00', 25, 72.9868, -131.345, NULL),
-(26, 'rhoncus.', 1, 'congue tur', '0000-00-00 00:00:00', 26, -86.9252, -127.895, NULL),
-(27, 'arcu', 0, 'eget ipsum', '0000-00-00 00:00:00', 27, 79.533, -173.794, NULL),
-(28, 'mauris.', 1, 'magna. Sus', '0000-00-00 00:00:00', 28, 51.7036, -5.03799, NULL),
-(29, 'ornare,', 1, 'et pede. N', '0000-00-00 00:00:00', 29, 34.0046, 7.38079, NULL),
-(30, 'ornare.', 1, 'arcu iacul', '0000-00-00 00:00:00', 30, 65.5487, 122.676, NULL),
-(31, 'amet', 0, 'eleifend n', '0000-00-00 00:00:00', 31, 63.2506, -110.706, NULL),
-(32, 'sodales', 0, 'at, velit.', '0000-00-00 00:00:00', 32, 51.2775, -27.6249, NULL),
-(33, 'neque.', 0, 'arcu imper', '0000-00-00 00:00:00', 33, -26.4674, -170.303, NULL),
-(34, 'eget', 1, 'Sed et lib', '0000-00-00 00:00:00', 34, 41.9421, -165.023, NULL),
-(35, 'cubilia', 0, 'orci luctu', '0000-00-00 00:00:00', 35, 82.333, 179.756, NULL),
-(36, 'fames', 0, 'risus quis', '0000-00-00 00:00:00', 36, 2.1106, -130.518, NULL),
-(37, 'aliquet', 0, 'ultricies ', '0000-00-00 00:00:00', 37, -34.0661, -160.633, NULL),
-(38, 'mauris', 0, 'Morbi vehi', '0000-00-00 00:00:00', 38, 61.7056, -13.5068, NULL),
-(39, 'consectetuer,', 0, 'libero. Do', '0000-00-00 00:00:00', 39, -84.3855, -70.9607, NULL),
-(40, 'Aenean', 1, 'neque et n', '0000-00-00 00:00:00', 40, 5.86867, -91.3643, NULL),
-(41, 'Etiam', 0, 'elementum,', '0000-00-00 00:00:00', 41, 28.3157, 77.7168, NULL),
-(42, 'in', 1, 'accumsan s', '0000-00-00 00:00:00', 42, 2.89977, 9.21122, NULL),
-(43, 'nec', 1, 'dui, nec t', '0000-00-00 00:00:00', 43, 22.3898, -61.6834, NULL),
-(44, 'est.', 0, 'sem ut cur', '0000-00-00 00:00:00', 44, 5.21507, 2.77422, NULL),
-(45, 'Donec', 1, 'porttitor ', '0000-00-00 00:00:00', 45, -38.8205, 172.94, NULL),
-(46, 'Sed', 0, 'aliquet. P', '0000-00-00 00:00:00', 46, 10.6431, 139.303, NULL),
-(47, 'mauris', 1, 'eu, placer', '0000-00-00 00:00:00', 47, -24.9648, 75.3216, NULL),
-(48, 'tellus.', 1, 'In sceleri', '0000-00-00 00:00:00', 48, -59.8012, 31.4154, NULL),
-(49, 'et', 0, 'suscipit, ', '0000-00-00 00:00:00', 49, 41.7067, -73.6612, NULL),
-(50, 'amet,', 0, 'velit just', '0000-00-00 00:00:00', 50, -77.3456, 161.258, NULL),
-(51, 'nisl.', 1, 'velit. Ali', '0000-00-00 00:00:00', 51, 36.5438, -25.4953, NULL),
-(52, 'Quisque', 0, 'Pellentesq', '0000-00-00 00:00:00', 52, 10.1779, -26.928, NULL),
-(53, 'tellus', 1, 'Nunc sed o', '0000-00-00 00:00:00', 53, -12.746, -107.82, NULL),
-(54, 'Curae;', 0, 'lacus. Ut ', '0000-00-00 00:00:00', 54, 85.9841, -62.3675, NULL),
-(55, 'malesuada', 0, 'feugiat no', '0000-00-00 00:00:00', 55, 74.4858, -23.5101, NULL),
-(56, 'congue', 1, 'Praesent e', '0000-00-00 00:00:00', 56, 9.79364, 147.527, NULL),
-(57, 'tellus.', 0, 'vulputate,', '0000-00-00 00:00:00', 57, 41.8111, 8.33922, NULL),
-(58, 'sit', 1, 'lorem ac r', '0000-00-00 00:00:00', 58, -44.1844, 90.441, NULL),
-(59, 'enim.', 1, 'diam nunc,', '0000-00-00 00:00:00', 59, 13.4906, -157.137, NULL),
-(60, 'nec', 1, 'urna et ar', '0000-00-00 00:00:00', 60, 74.0607, -154.639, NULL),
-(61, 'mauris', 0, 'velit. Pel', '0000-00-00 00:00:00', 61, -49.1929, -56.4667, NULL),
-(62, 'rutrum', 1, 'enim. Cura', '0000-00-00 00:00:00', 62, 6.0656, -61.5579, NULL),
-(63, 'est.', 0, 'Aliquam ru', '0000-00-00 00:00:00', 63, -69.2614, 159.907, NULL),
-(64, 'lacinia.', 0, 'amet ornar', '0000-00-00 00:00:00', 64, 53.3401, -93.4042, NULL),
-(65, 'dictum', 0, 'quam a fel', '0000-00-00 00:00:00', 65, -5.36444, 137.278, NULL),
-(66, 'eu', 0, 'eu arcu. M', '0000-00-00 00:00:00', 66, 61.2084, 25.7825, NULL),
-(67, 'velit', 1, 'nec, diam.', '0000-00-00 00:00:00', 67, 59.639, 127.884, NULL),
-(68, 'consequat', 1, 'aliquam ar', '0000-00-00 00:00:00', 68, -60.6276, 77.5867, NULL),
-(69, 'Nullam', 1, 'nec tellus', '0000-00-00 00:00:00', 69, 10.2477, 113.044, NULL),
-(70, 'eget', 1, 'erat. Etia', '0000-00-00 00:00:00', 70, 85.8507, 105.005, NULL),
-(71, 'Quisque', 1, 'in, dolor.', '0000-00-00 00:00:00', 71, 53.623, 136.357, NULL),
-(72, 'a', 1, 'Aenean sed', '0000-00-00 00:00:00', 72, -47.4886, -78.9241, NULL),
-(73, 'Fusce', 0, 'bibendum. ', '2016-03-20 19:31:00', 73, 5.04453, -32.5865, NULL),
-(74, 'facilisi.', 0, 'Suspendiss', '0000-00-00 00:00:00', 74, 44.4809, -142.288, NULL),
-(75, 'non', 0, 'viverra. M', '0000-00-00 00:00:00', 75, 82.47, 93.0714, NULL),
-(76, 'at', 1, 'lectus ant', '0000-00-00 00:00:00', 76, 30.3574, 124.392, NULL),
-(77, 'ut', 0, 'mattis. In', '0000-00-00 00:00:00', 77, -51.4798, 15.4314, NULL),
-(78, 'Phasellus', 1, 'urna. Null', '0000-00-00 00:00:00', 78, 30.3606, 1.4128, NULL),
-(79, 'hendrerit', 0, 'Integer vu', '0000-00-00 00:00:00', 79, -14.8404, 140.328, NULL),
-(80, 'nisi.', 1, 'Donec elem', '0000-00-00 00:00:00', 80, 27.4176, 17.7025, NULL),
-(81, 'Duis', 1, 'erat vel p', '0000-00-00 00:00:00', 81, 23.1653, 4.37122, NULL),
-(82, 'Integer', 0, 'turpis vit', '0000-00-00 00:00:00', 82, 88.1674, -146.603, NULL),
-(83, 'dapibus', 0, 'natoque pe', '0000-00-00 00:00:00', 83, 43.4738, -124.525, NULL),
-(84, 'eget', 1, 'malesuada ', '0000-00-00 00:00:00', 84, -43.2642, 21.5811, NULL),
-(85, 'enim', 0, 'montes, na', '0000-00-00 00:00:00', 85, 89.5437, -0.92862, NULL),
-(86, 'Cras', 1, 'sagittis f', '0000-00-00 00:00:00', 86, 11.066, 114.907, NULL),
-(87, 'Morbi', 0, 'Ut nec urn', '0000-00-00 00:00:00', 87, -88.4655, -153.745, NULL),
-(88, 'tortor', 1, 'ante ipsum', '0000-00-00 00:00:00', 88, -87.1396, -53.3319, NULL),
-(89, 'Suspendisse', 1, 'aliquet, m', '0000-00-00 00:00:00', 89, -9.67204, 137.677, NULL),
-(90, 'natoque', 1, 'nunc nulla', '0000-00-00 00:00:00', 90, 0.13893, 147.062, NULL),
-(91, 'dolor', 1, 'congue a, ', '0000-00-00 00:00:00', 91, 51.3714, -169.467, NULL),
-(92, 'Cum', 0, 'ultrices p', '0000-00-00 00:00:00', 92, -28.237, -142.009, NULL),
-(93, 'mauris', 1, 'pede. Prae', '0000-00-00 00:00:00', 93, 73.3655, 131.286, NULL),
-(94, 'Pellentesque', 0, 'luctus et ', '0000-00-00 00:00:00', 94, 22.3556, -128.513, NULL),
-(95, 'Donec', 0, 'bibendum s', '0000-00-00 00:00:00', 95, 86.0722, 164.802, NULL),
-(96, 'sit', 1, 'Fusce mi l', '0000-00-00 00:00:00', 96, 18.5651, -9.94529, NULL),
-(97, 'Duis', 1, 'congue, el', '0000-00-00 00:00:00', 97, 71.174, -140.157, NULL),
-(98, 'dignissim', 1, 'sagittis a', '0000-00-00 00:00:00', 98, -28.685, 58.2405, NULL),
-(99, 'nec', 0, 'Quisque fr', '0000-00-00 00:00:00', 99, -14.1937, -101.053, NULL),
-(100, 'ac', 1, 'magna. Pha', '0000-00-00 00:00:00', 100, -14.9834, -60.561, NULL);
+INSERT INTO `stream` (`id`, `title`, `visibility`, `created_at`, `id_user`, `latitude`, `longitude`, `anonymous`, `urgency`, `updated_at`) VALUES
+('1', 'sed,', 1, '0000-00-00 00:00:00', 1, 10.8575, -114.248, 0, 0, '0000-00-00 00:00:00'),
+('10', 'neque', 0, '0000-00-00 00:00:00', 10, -78.7383, -115.374, 0, 0, '0000-00-00 00:00:00'),
+('100', 'ac', 1, '0000-00-00 00:00:00', 100, -14.9834, -60.561, 0, 0, '0000-00-00 00:00:00'),
+('11', 'amet', 0, '0000-00-00 00:00:00', 11, -43.7868, 146.83, 0, 0, '0000-00-00 00:00:00'),
+('12', 'et,', 0, '0000-00-00 00:00:00', 12, 22.5856, -21.14, 0, 0, '0000-00-00 00:00:00'),
+('13', 'ac', 0, '0000-00-00 00:00:00', 13, -84.1767, -56.5906, 0, 0, '0000-00-00 00:00:00'),
+('14', 'blandit', 1, '0000-00-00 00:00:00', 14, 65.8672, 56.6343, 0, 0, '0000-00-00 00:00:00'),
+('15', 'Vivamus', 1, '0000-00-00 00:00:00', 15, 64.4699, -107.274, 0, 0, '0000-00-00 00:00:00'),
+('16', 'hendrerit', 1, '0000-00-00 00:00:00', 16, 83.9858, 128.42, 0, 0, '0000-00-00 00:00:00'),
+('17', 'ac', 0, '0000-00-00 00:00:00', 17, -3.21438, 117.076, 0, 0, '0000-00-00 00:00:00'),
+('18', 'fermentum', 1, '0000-00-00 00:00:00', 18, 29.43, -19.3617, 0, 0, '0000-00-00 00:00:00'),
+('19', 'Donec', 1, '0000-00-00 00:00:00', 19, -60.3971, 9.72869, 0, 0, '0000-00-00 00:00:00'),
+('2', 'neque', 1, '0000-00-00 00:00:00', 2, 69.9342, 15.8724, 0, 0, '0000-00-00 00:00:00'),
+('20', 'Suspendisse', 0, '0000-00-00 00:00:00', 20, -58.5214, 118.151, 0, 0, '0000-00-00 00:00:00'),
+('21', 'non', 0, '0000-00-00 00:00:00', 21, -35.882, -56.0997, 0, 0, '0000-00-00 00:00:00'),
+('22', 'vestibulum', 0, '0000-00-00 00:00:00', 22, -51.8115, -115.173, 0, 0, '0000-00-00 00:00:00'),
+('23', 'eu,', 0, '0000-00-00 00:00:00', 23, 66.6208, 59.1048, 0, 0, '0000-00-00 00:00:00'),
+('24', 'leo.', 1, '0000-00-00 00:00:00', 24, 50.3232, -108.021, 0, 0, '0000-00-00 00:00:00'),
+('25', 'mollis', 1, '0000-00-00 00:00:00', 25, 72.9868, -131.345, 0, 0, '0000-00-00 00:00:00'),
+('26', 'rhoncus.', 1, '0000-00-00 00:00:00', 26, -86.9252, -127.895, 0, 0, '0000-00-00 00:00:00'),
+('27', 'arcu', 0, '0000-00-00 00:00:00', 27, 79.533, -173.794, 0, 0, '0000-00-00 00:00:00'),
+('28', 'mauris.', 1, '0000-00-00 00:00:00', 28, 51.7036, -5.03799, 0, 0, '0000-00-00 00:00:00'),
+('29', 'ornare,', 1, '0000-00-00 00:00:00', 29, 34.0046, 7.38079, 0, 0, '0000-00-00 00:00:00'),
+('3', 'non', 0, '0000-00-00 00:00:00', 3, -21.1202, 174.939, 0, 0, '0000-00-00 00:00:00'),
+('30', 'ornare.', 1, '0000-00-00 00:00:00', 30, 65.5487, 122.676, 0, 0, '0000-00-00 00:00:00'),
+('31', 'amet', 0, '0000-00-00 00:00:00', 31, 63.2506, -110.706, 0, 0, '0000-00-00 00:00:00'),
+('32', 'sodales', 0, '0000-00-00 00:00:00', 32, 51.2775, -27.6249, 0, 0, '0000-00-00 00:00:00'),
+('33', 'neque.', 0, '0000-00-00 00:00:00', 33, -26.4674, -170.303, 0, 0, '0000-00-00 00:00:00'),
+('34', 'eget', 1, '0000-00-00 00:00:00', 34, 41.9421, -165.023, 0, 0, '0000-00-00 00:00:00'),
+('35', 'cubilia', 0, '0000-00-00 00:00:00', 35, 82.333, 179.756, 0, 0, '0000-00-00 00:00:00'),
+('36', 'fames', 0, '0000-00-00 00:00:00', 36, 2.1106, -130.518, 0, 0, '0000-00-00 00:00:00'),
+('37', 'aliquet', 0, '0000-00-00 00:00:00', 37, -34.0661, -160.633, 0, 0, '0000-00-00 00:00:00'),
+('38', 'mauris', 0, '0000-00-00 00:00:00', 38, 61.7056, -13.5068, 0, 0, '0000-00-00 00:00:00'),
+('39', 'consectetuer,', 0, '0000-00-00 00:00:00', 39, -84.3855, -70.9607, 0, 0, '0000-00-00 00:00:00'),
+('4', 'Vivamus', 1, '0000-00-00 00:00:00', 4, -9.93099, 130.814, 0, 0, '0000-00-00 00:00:00'),
+('40', 'Aenean', 1, '0000-00-00 00:00:00', 40, 5.86867, -91.3643, 0, 0, '0000-00-00 00:00:00'),
+('41', 'Etiam', 0, '0000-00-00 00:00:00', 41, 28.3157, 77.7168, 0, 0, '0000-00-00 00:00:00'),
+('42', 'in', 1, '0000-00-00 00:00:00', 42, 2.89977, 9.21122, 0, 0, '0000-00-00 00:00:00'),
+('43', 'nec', 1, '0000-00-00 00:00:00', 43, 22.3898, -61.6834, 0, 0, '0000-00-00 00:00:00'),
+('44', 'est.', 0, '0000-00-00 00:00:00', 44, 5.21507, 2.77422, 0, 0, '0000-00-00 00:00:00'),
+('45', 'Donec', 1, '0000-00-00 00:00:00', 45, -38.8205, 172.94, 0, 0, '0000-00-00 00:00:00'),
+('46', 'Sed', 0, '0000-00-00 00:00:00', 46, 10.6431, 139.303, 0, 0, '0000-00-00 00:00:00'),
+('47', 'mauris', 1, '0000-00-00 00:00:00', 47, -24.9648, 75.3216, 0, 0, '0000-00-00 00:00:00'),
+('48', 'tellus.', 1, '0000-00-00 00:00:00', 48, -59.8012, 31.4154, 0, 0, '0000-00-00 00:00:00'),
+('49', 'et', 0, '0000-00-00 00:00:00', 49, 41.7067, -73.6612, 0, 0, '0000-00-00 00:00:00'),
+('5', 'velit.', 0, '0000-00-00 00:00:00', 5, -62.6541, 144.978, 0, 0, '0000-00-00 00:00:00'),
+('50', 'amet,', 0, '0000-00-00 00:00:00', 50, -77.3456, 161.258, 0, 0, '0000-00-00 00:00:00'),
+('51', 'nisl.', 1, '0000-00-00 00:00:00', 51, 36.5438, -25.4953, 0, 0, '0000-00-00 00:00:00'),
+('52', 'Quisque', 0, '0000-00-00 00:00:00', 52, 10.1779, -26.928, 0, 0, '0000-00-00 00:00:00'),
+('53', 'tellus', 1, '0000-00-00 00:00:00', 53, -12.746, -107.82, 0, 0, '0000-00-00 00:00:00'),
+('54', 'Curae;', 0, '0000-00-00 00:00:00', 54, 85.9841, -62.3675, 0, 0, '0000-00-00 00:00:00'),
+('55', 'malesuada', 0, '0000-00-00 00:00:00', 55, 74.4858, -23.5101, 0, 0, '0000-00-00 00:00:00'),
+('56', 'congue', 1, '0000-00-00 00:00:00', 56, 9.79364, 147.527, 0, 0, '0000-00-00 00:00:00'),
+('57', 'tellus.', 0, '0000-00-00 00:00:00', 57, 41.8111, 8.33922, 0, 0, '0000-00-00 00:00:00'),
+('58', 'sit', 1, '0000-00-00 00:00:00', 58, -44.1844, 90.441, 0, 0, '0000-00-00 00:00:00'),
+('59', 'enim.', 1, '0000-00-00 00:00:00', 59, 13.4906, -157.137, 0, 0, '0000-00-00 00:00:00'),
+('6', 'nonummy.', 1, '0000-00-00 00:00:00', 6, 0.3744, -126.067, 0, 0, '0000-00-00 00:00:00'),
+('60', 'nec', 1, '0000-00-00 00:00:00', 60, 74.0607, -154.639, 0, 0, '0000-00-00 00:00:00'),
+('61', 'mauris', 0, '0000-00-00 00:00:00', 61, -49.1929, -56.4667, 0, 0, '0000-00-00 00:00:00'),
+('62', 'rutrum', 1, '0000-00-00 00:00:00', 62, 6.0656, -61.5579, 0, 0, '0000-00-00 00:00:00'),
+('63', 'est.', 0, '0000-00-00 00:00:00', 63, -69.2614, 159.907, 0, 0, '0000-00-00 00:00:00'),
+('64', 'lacinia.', 0, '0000-00-00 00:00:00', 64, 53.3401, -93.4042, 0, 0, '0000-00-00 00:00:00'),
+('65', 'dictum', 0, '0000-00-00 00:00:00', 65, -5.36444, 137.278, 0, 0, '0000-00-00 00:00:00'),
+('66', 'eu', 0, '0000-00-00 00:00:00', 66, 61.2084, 25.7825, 0, 0, '0000-00-00 00:00:00'),
+('67', 'velit', 1, '0000-00-00 00:00:00', 67, 59.639, 127.884, 0, 0, '0000-00-00 00:00:00'),
+('68', 'consequat', 1, '0000-00-00 00:00:00', 68, -60.6276, 77.5867, 0, 0, '0000-00-00 00:00:00'),
+('69', 'Nullam', 1, '0000-00-00 00:00:00', 69, 10.2477, 113.044, 0, 0, '0000-00-00 00:00:00'),
+('7', 'nec', 1, '0000-00-00 00:00:00', 7, 69.4355, 44.7591, 0, 0, '0000-00-00 00:00:00'),
+('70', 'eget', 1, '0000-00-00 00:00:00', 70, 85.8507, 105.005, 0, 0, '0000-00-00 00:00:00'),
+('71', 'Quisque', 1, '0000-00-00 00:00:00', 71, 53.623, 136.357, 0, 0, '0000-00-00 00:00:00'),
+('72', 'a', 1, '0000-00-00 00:00:00', 72, -47.4886, -78.9241, 0, 0, '0000-00-00 00:00:00'),
+('73', 'Fusce', 0, '2016-03-20 20:31:00', 73, 5.04453, -32.5865, 0, 0, '0000-00-00 00:00:00'),
+('74', 'facilisi.', 0, '0000-00-00 00:00:00', 74, 44.4809, -142.288, 0, 0, '0000-00-00 00:00:00'),
+('75', 'non', 0, '0000-00-00 00:00:00', 75, 82.47, 93.0714, 0, 0, '0000-00-00 00:00:00'),
+('76', 'at', 1, '0000-00-00 00:00:00', 76, 30.3574, 124.392, 0, 0, '0000-00-00 00:00:00'),
+('77', 'ut', 0, '0000-00-00 00:00:00', 77, -51.4798, 15.4314, 0, 0, '0000-00-00 00:00:00'),
+('78', 'Phasellus', 1, '0000-00-00 00:00:00', 78, 30.3606, 1.4128, 0, 0, '0000-00-00 00:00:00'),
+('79', 'hendrerit', 0, '0000-00-00 00:00:00', 79, -14.8404, 140.328, 0, 0, '0000-00-00 00:00:00'),
+('8', 'Cras', 1, '0000-00-00 00:00:00', 8, -10.145, -13.8318, 0, 0, '0000-00-00 00:00:00'),
+('80', 'nisi.', 1, '0000-00-00 00:00:00', 80, 27.4176, 17.7025, 0, 0, '0000-00-00 00:00:00'),
+('81', 'Duis', 1, '0000-00-00 00:00:00', 81, 23.1653, 4.37122, 0, 0, '0000-00-00 00:00:00'),
+('82', 'Integer', 0, '0000-00-00 00:00:00', 82, 88.1674, -146.603, 0, 0, '0000-00-00 00:00:00'),
+('83', 'dapibus', 0, '0000-00-00 00:00:00', 83, 43.4738, -124.525, 0, 0, '0000-00-00 00:00:00'),
+('84', 'eget', 1, '0000-00-00 00:00:00', 84, -43.2642, 21.5811, 0, 0, '0000-00-00 00:00:00'),
+('85', 'enim', 0, '0000-00-00 00:00:00', 85, 89.5437, -0.92862, 0, 0, '0000-00-00 00:00:00'),
+('86', 'Cras', 1, '0000-00-00 00:00:00', 86, 11.066, 114.907, 0, 0, '0000-00-00 00:00:00'),
+('87', 'Morbi', 0, '0000-00-00 00:00:00', 87, -88.4655, -153.745, 0, 0, '0000-00-00 00:00:00'),
+('88', 'tortor', 1, '0000-00-00 00:00:00', 88, -87.1396, -53.3319, 0, 0, '0000-00-00 00:00:00'),
+('89', 'Suspendisse', 1, '0000-00-00 00:00:00', 89, -9.67204, 137.677, 0, 0, '0000-00-00 00:00:00'),
+('9', 'magna', 0, '0000-00-00 00:00:00', 9, 71.6898, 52.9938, 0, 0, '0000-00-00 00:00:00'),
+('90', 'natoque', 1, '0000-00-00 00:00:00', 90, 0.13893, 147.062, 0, 0, '0000-00-00 00:00:00'),
+('91', 'dolor', 1, '0000-00-00 00:00:00', 91, 51.3714, -169.467, 0, 0, '0000-00-00 00:00:00'),
+('92', 'Cum', 0, '0000-00-00 00:00:00', 92, -28.237, -142.009, 0, 0, '0000-00-00 00:00:00'),
+('93', 'mauris', 1, '0000-00-00 00:00:00', 93, 73.3655, 131.286, 0, 0, '0000-00-00 00:00:00'),
+('94', 'Pellentesque', 0, '0000-00-00 00:00:00', 94, 22.3556, -128.513, 0, 0, '0000-00-00 00:00:00'),
+('95', 'Donec', 0, '0000-00-00 00:00:00', 95, 86.0722, 164.802, 0, 0, '0000-00-00 00:00:00'),
+('96', 'sit', 1, '0000-00-00 00:00:00', 96, 18.5651, -9.94529, 0, 0, '0000-00-00 00:00:00'),
+('97', 'Duis', 1, '0000-00-00 00:00:00', 97, 71.174, -140.157, 0, 0, '0000-00-00 00:00:00'),
+('98', 'dignissim', 1, '0000-00-00 00:00:00', 98, -28.685, 58.2405, 0, 0, '0000-00-00 00:00:00'),
+('99', 'nec', 0, '0000-00-00 00:00:00', 99, -14.1937, -101.053, 0, 0, '0000-00-00 00:00:00'),
+('aae9cd70-7129-11eb-bfd0-88d7f67bd077', 'mdr', 1, '2021-02-17 14:08:54', 1, 48.7073, 6.2637, 1, 1, '2021-02-17 14:08:54');
 
 -- --------------------------------------------------------
 
@@ -420,15 +409,11 @@ INSERT INTO `stream` (`id`, `title`, `visibility`, `mode`, `created_at`, `id_use
 -- Structure de la table `subscribe`
 --
 
-DROP TABLE IF EXISTS `subscribe`;
-CREATE TABLE IF NOT EXISTS `subscribe` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_user` int(11) NOT NULL,
-  `id_streamer` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk1_user` (`id_user`),
-  KEY `fk2_streamer` (`id_streamer`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
+CREATE TABLE `subscribe` (
+  `id` int NOT NULL,
+  `id_user` int NOT NULL,
+  `id_streamer` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `subscribe`
@@ -542,9 +527,8 @@ INSERT INTO `subscribe` (`id`, `id_user`, `id_streamer`) VALUES
 -- Structure de la table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `user` (
+  `id` int NOT NULL,
   `name` varchar(30) NOT NULL,
   `firstname` varchar(30) NOT NULL,
   `mail` varchar(35) NOT NULL,
@@ -554,9 +538,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `image` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `user`
@@ -662,7 +645,8 @@ INSERT INTO `user` (`id`, `name`, `firstname`, `mail`, `username`, `password`, `
 (97, 'Bruce', 'Ferdinand', 'tellus.Suspendisse@Integer.co.uk', 'Melissa', 'a,', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 'orci,', '0000-00-00 00:00:00', NULL, NULL),
 (98, 'Duncan', 'Wanda', 'Proin.dolor.Nulla@bibendum.org', 'Branden', 'libero', 'Lorem ipsum dolor sit amet,', 'malesuada', '0000-00-00 00:00:00', NULL, NULL),
 (99, 'Lester', 'Ciaran', 'nulla@luctussitamet.co.uk', 'Shoshana', 'Integer', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam', 'aliquam', '0000-00-00 00:00:00', NULL, NULL),
-(100, 'Vargas', 'Carla', 'Integer.eu.lacus@adipiscinglacusUt.', 'Nita', 'parturient', 'Lorem ipsum dolor sit amet, consectetuer', 'turpis', '0000-00-00 00:00:00', NULL, NULL);
+(100, 'Vargas', 'Carla', 'Integer.eu.lacus@adipiscinglacusUt.', 'Nita', 'parturient', 'Lorem ipsum dolor sit amet, consectetuer', 'turpis', '0000-00-00 00:00:00', NULL, NULL),
+(113, 'dzazad', 'dazadzadz', 'dazadz@mdr.fr', 'dazadzadz', '$2y$10$mTyXSE9Ch3ACov2v2tlWpeqESSpiAu5OfrbyHQMgtt8/aO92e8n0O', '', '', '2021-02-16 13:39:10', '2021-02-16 13:39:10', NULL);
 
 -- --------------------------------------------------------
 
@@ -670,21 +654,18 @@ INSERT INTO `user` (`id`, `name`, `firstname`, `mail`, `username`, `password`, `
 -- Structure de la table `video`
 --
 
-DROP TABLE IF EXISTS `video`;
-CREATE TABLE IF NOT EXISTS `video` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `video` (
+  `id` int NOT NULL,
   `name` varchar(40) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `status` int(11) NOT NULL,
+  `status` int NOT NULL,
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `path` varchar(40) NOT NULL,
-  `view` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk1_video_user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
+  `view` int NOT NULL,
+  `id_user` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `video`
@@ -791,6 +772,100 @@ INSERT INTO `video` (`id`, `name`, `description`, `status`, `created_at`, `updat
 (98, 'aliquam', 'Lorem ipsum dolor sit amet,', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL, 'In', 2147483647, 98),
 (99, 'viverra.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL, 'sem,', 2147483647, 99),
 (100, 'pellentesque', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL, 'et', 2147483647, 100);
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `message`
+--
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk1_message_user` (`id_user`),
+  ADD KEY `fk2_message_stream` (`id_stream`);
+
+--
+-- Index pour la table `notification`
+--
+ALTER TABLE `notification`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `private_message`
+--
+ALTER TABLE `private_message`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk1_private_sender` (`id_sender`),
+  ADD KEY `fk1_private_sendee` (`id_sendee`);
+
+--
+-- Index pour la table `stream`
+--
+ALTER TABLE `stream`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk1_stream_user` (`id_user`);
+
+--
+-- Index pour la table `subscribe`
+--
+ALTER TABLE `subscribe`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk1_user` (`id_user`),
+  ADD KEY `fk2_streamer` (`id_streamer`);
+
+--
+-- Index pour la table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `video`
+--
+ALTER TABLE `video`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk1_video_user` (`id_user`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `message`
+--
+ALTER TABLE `message`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+
+--
+-- AUTO_INCREMENT pour la table `notification`
+--
+ALTER TABLE `notification`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `private_message`
+--
+ALTER TABLE `private_message`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+
+--
+-- AUTO_INCREMENT pour la table `subscribe`
+--
+ALTER TABLE `subscribe`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+
+--
+-- AUTO_INCREMENT pour la table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+
+--
+-- AUTO_INCREMENT pour la table `video`
+--
+ALTER TABLE `video`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- Contraintes pour les tables déchargées
