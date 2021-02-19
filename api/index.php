@@ -12,12 +12,15 @@ $db = new Illuminate\Database\Capsule\Manager();
 $db->addConnection($config_ini); /* configuration avec nos paramètres */
 $db->setAsGlobal();              /* rendre la connexion visible dans tout le projet */
 $db->bootEloquent();             /* établir la connexion */
+
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \projet\controller\ControllerUser;
 use \projet\controller\ControllerStream;
 use \projet\controller\ControllerMessage;
-function cors() {
+
+function cors()
+{
     // Allow from any origin
     if (isset($_SERVER['HTTP_ORIGIN'])) {
         header("Access-Control-Allow-Origin: *");
@@ -42,7 +45,6 @@ function cors() {
 }
 cors();
 
-
 $container = new \Slim\Container(array_merge($config_slim, $errors));
 $app = new \Slim\App($container);
 /*$app->get('/test[/]',function(Request $req, Response $res, array $args) : Response
@@ -51,26 +53,28 @@ $app = new \Slim\App($container);
     return $res;
 });*/
 // ****************************** ROUTES *****************************************
-$app->get("/home[/]", ControllerStream::class.':home');
+$app->get("/home[/]", ControllerStream::class . ':home');
 //////////////////////////////////////////////////////////////////////////////////
 
 // MEMBRE
-$app->get("/user/{id}", ControllerUser::class.':getUser');
+$app->get("/user/{id}", ControllerUser::class . ':getUser');
 
-$app->put("/user/{id}", ControllerUser::class.':modifProfile');
+$app->put("/user/{id}", ControllerUser::class . ':modifProfile');
 
-$app->post("/user", ControllerUser::class.':createUser');
+$app->post("/user", ControllerUser::class . ':createUser');
 
-$app->delete("/user", ControllerUser::class.':deleteUser');
+$app->delete("/user", ControllerUser::class . ':deleteUser');
 
-$app->post("/signin", ControllerUser::class.':signIn');
+$app->post("/signIn", ControllerUser::class . ':signIn');
 
 // STREAM
-$app->get('/alert[/]', ControllerStream::class.':voirStreamProche');
+$app->get('/alert[/]', ControllerStream::class . ':voirStreamProche');
 
-$app->get("/stream/{id}[/]", ControllerStream::class.':getStream');
+$app->get("/stream/{id}[/]", ControllerStream::class . ':getStream');
 
-$app->post('/stream', ControllerStream::class.':createStream');
+$app->delete("/stream/{id}[/]", ControllerStream::class . ':deleteStream');
+
+$app->post('/stream', ControllerStream::class . ':createStream');
 // VIDEOS
 
 /*$app->get("/video", function (Request $rq, Response $resp): Response {
@@ -83,10 +87,10 @@ $app->get("/msg", function (Request $rq, Response $resp): Response {
 });*/
 
 //MESSAGE
-$app->get("/msg", ControllerMessage::class.':getMessages');
+$app->get("/msg", ControllerMessage::class . ':getMessages');
 
-$app->post('/msg', ControllerMessage::class.':sendMessage');
+$app->post('/msg', ControllerMessage::class . ':sendMessage');
 
-$app->delete('/msg', ControllerMessage::class.':deleteMessage');
+$app->delete('/msg', ControllerMessage::class . ':deleteMessage');
 
 $app->run();
