@@ -85,5 +85,25 @@ class ControllerUser
 
     public function signIn(Request $req, Response $res, array $args): Response
     {
+        $body = $req->getBody();
+        try {
+            $user = User::where('pseudo', '=', $req->getBody()->username)->firstorFail();
+        } catch (\Exception $e) {
+            $res = $res->withStatus(404)
+                ->withHeader('Content-Type', 'application/json');
+            $res->getBody()->write(json_encode($e->getmessage()));
+            return $res;
+        }
+        if (password_verify($body->password, $user->password)) {
+            $res = $res->withStatus(200)
+                ->withHeader('Content-Type', 'application/json');
+            $res->getBody()->write(json_encode($user));
+            return $res;
+        } else {
+            $res = $res->withStatus(401)
+                ->withHeader('Content-Type', 'application/json');
+            $res->getBody()->write(json_encode(array('error' => "Wrong password")));
+            return $res;
+        }
     }
 }
