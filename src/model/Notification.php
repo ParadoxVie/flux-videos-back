@@ -1,5 +1,5 @@
 <?php
-
+//Maybe Work One Day :D
 namespace projet\model;
 
 class Notification extends \Illuminate\Database\Eloquent\Model {
