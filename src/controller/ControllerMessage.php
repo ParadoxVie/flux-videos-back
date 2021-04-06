@@ -14,9 +14,7 @@ class ControllerMessage
 
     public function getMessages(Request $req, Response $res, array $args): Response
     {
-
-        $res->getBody()->write("<h1>Salut</h1>");
-        return $res;
+        
     }
 
     public function sendMessage(Request $req, Response $res, array $args): Response

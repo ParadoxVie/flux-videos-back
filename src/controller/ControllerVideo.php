@@ -24,7 +24,13 @@ class ControllerVideo
 
     public function sendVideo(Request $req, Response $res): Response
     {
-
+        $body = $req->getParsedBody();
+        $video = new Video;
+        $video->name = 
+        $res = $res->withStatus(201)
+                    ->withHeader('Content-Type','application/json');
+        $res->getBody()->write(json_encode(["success" => "Video has been saved"]));
+        return $res;
     }
 
     public function modifVideo(Request $req, Response $res): Response
