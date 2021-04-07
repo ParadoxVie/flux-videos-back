@@ -4,6 +4,7 @@ use\Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \projet\model\Stream;
 use \projet\model\Video;
+use \projet\model\User;
 use \Ramsey\Uuid\Uuid;
 class ControllerStream
 {
@@ -16,8 +17,8 @@ class ControllerStream
 
     public function home(Request $req, Response $res): Response
     {
-        $streams = Stream::select()->take(4)->where('visibility','=',0)->orderBy('created_at')->get();
-        $videos = Video::select()->take(4)->orderBy('created_at')->get();
+        $streams = Stream::select()->take(30)->where('visibility','=',0)->with('creator')->orderBy('created_at')->get();
+        $videos = Video::select()->take(30)->orderBy('created_at')->get();
         $result = array(
             'streams' => $streams,
             'videos' => $videos,
@@ -41,7 +42,7 @@ class ControllerStream
     public function getStream(Request $req, Response $res,array $args): Response
     {
         $id = $args['id'];
-        $stream = Stream::select()->where('id','=',$id)->first();
+        $stream = Stream::select()->where('id','=',$id)->with('creator')->first();
         if(!is_null($stream))
         {
             $res = $res->withStatus(200)                     
@@ -75,7 +76,11 @@ class ControllerStream
         $stream->urgency = $infos->urgency;
         $stream->latitude = $str->lat;
         $stream->longitude = $str->lon;
-        $stream->id_user = 1;
+        //122
+        if(is_null($infos->username))
+            $stream->id_user = 122;
+        else
+            $stream->id_user = User::where('username','=',$infos->username)->first()->id;
 
         try
         {
@@ -96,7 +101,7 @@ class ControllerStream
                 'id' => $stream->id,
                 'title' => $stream->title,
                 "visibilty" => $stream->visibilty,
-                "id_user" => $stream->user_id,
+                "id_user" => $stream->id_user,
                 "latitude" => $stream->latitude,
                 "longitude" => $stream->longitude,
                 "anonymous" => $stream->anonymous,
