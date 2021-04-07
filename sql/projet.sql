@@ -2,10 +2,10 @@
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 07, 2021 at 07:13 AM
--- Server version: 8.0.22
--- PHP Version: 7.4.11
+-- Hôte : localhost
+-- Généré le : mer. 07 avr. 2021 à 09:07
+-- Version du serveur :  8.0.23
+-- Version de PHP : 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `projet`
+-- Base de données : `projet`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `message`
+-- Structure de la table `message`
 --
 
 CREATE TABLE `message` (
@@ -39,7 +39,7 @@ CREATE TABLE `message` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notification`
+-- Structure de la table `notification`
 --
 
 CREATE TABLE `notification` (
@@ -52,7 +52,7 @@ CREATE TABLE `notification` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `private_message`
+-- Structure de la table `private_message`
 --
 
 CREATE TABLE `private_message` (
@@ -66,7 +66,7 @@ CREATE TABLE `private_message` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `private_message`
+-- Déchargement des données de la table `private_message`
 --
 
 INSERT INTO `private_message` (`id`, `text`, `id_sender`, `id_sendee`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -174,7 +174,7 @@ INSERT INTO `private_message` (`id`, `text`, `id_sender`, `id_sendee`, `created_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stream`
+-- Structure de la table `stream`
 --
 
 CREATE TABLE `stream` (
@@ -192,18 +192,28 @@ CREATE TABLE `stream` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `stream`
+-- Déchargement des données de la table `stream`
 --
 
 INSERT INTO `stream` (`id`, `title`, `visibility`, `created_at`, `id_user`, `latitude`, `longitude`, `anonymous`, `urgency`, `updated_at`, `deleted_at`) VALUES
+('4ad1bfae-977d-11eb-bb27-88d7f67bd077', 'fezfze', 0, '2021-04-07 08:43:14', 116, 48.6994, 6.2199, 0, 0, '2021-04-07 08:43:19', '2021-04-07 08:43:19'),
+('51416142-9772-11eb-8eca-88d7f67bd077', 'test', 0, '2021-04-07 07:24:41', 117, 48.6994, 6.2199, 0, 0, '2021-04-07 07:24:41', NULL),
 ('6ae22f22-96e7-11eb-b553-94de8025ca6a', 'yyyyyyyyyy', 0, '2021-04-06 14:50:24', 1, 48.0175, 6.5882, 0, 0, '2021-04-06 14:50:24', NULL),
+('7dd605c2-9778-11eb-aac3-88d7f67bd077', 'Révélation Je suis homosexuel', 0, '2021-04-07 08:08:52', 117, 48.6994, 6.2199, 1, 0, '2021-04-07 08:08:52', NULL),
+('806b74aa-977f-11eb-808e-88d7f67bd077', 'test', 0, '2021-04-07 08:59:03', 115, 48.6994, 6.2199, 0, 0, '2021-04-07 08:59:37', '2021-04-07 08:59:37'),
 ('8c60de0a-96e7-11eb-ae4a-94de8025ca6a', 'yyyyyyyyyy', 0, '2021-04-06 14:51:20', 1, 48.0175, 6.5882, 0, 0, '2021-04-06 14:54:20', '2021-04-06 14:54:20'),
-('ad9de8c0-96e6-11eb-8fc2-94de8025ca6a', 'Urgent', 1, '2021-04-06 14:45:06', 1, 48.0175, 6.5882, 0, 1, '2021-04-06 14:45:06', NULL);
+('981ebc2e-977f-11eb-b189-88d7f67bd077', 'test', 1, '2021-04-07 08:59:43', 115, 48.6994, 6.2199, 0, 0, '2021-04-07 08:59:43', NULL),
+('ad9de8c0-96e6-11eb-8fc2-94de8025ca6a', 'Urgent', 1, '2021-04-06 14:45:06', 1, 48.0175, 6.5882, 0, 1, '2021-04-06 14:45:06', NULL),
+('c070637e-977c-11eb-a14b-88d7f67bd077', 'zzadad', 0, '2021-04-07 08:39:22', 116, 48.6994, 6.2199, 0, 0, '2021-04-07 08:39:28', '2021-04-07 08:39:28'),
+('c5d919d4-977a-11eb-9dbd-88d7f67bd077', 'azerty', 0, '2021-04-07 08:25:12', 116, 48.6994, 6.2199, 0, 0, '2021-04-07 08:25:12', NULL),
+('ccb9b9b0-9776-11eb-90a1-88d7f67bd077', 'Stream ano', 0, '2021-04-07 07:56:46', 117, 48.6994, 6.2199, 1, 0, '2021-04-07 07:56:46', NULL),
+('d2b4e942-977c-11eb-85df-88d7f67bd077', 'nym', 1, '2021-04-07 08:39:53', 116, 48.6994, 6.2199, 0, 0, '2021-04-07 08:42:21', '2021-04-07 08:42:21'),
+('daa1151e-977b-11eb-80ba-88d7f67bd077', 'xfczef', 0, '2021-04-07 08:32:57', 116, 48.6994, 6.2199, 0, 1, '2021-04-07 08:32:57', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subscribe`
+-- Structure de la table `subscribe`
 --
 
 CREATE TABLE `subscribe` (
@@ -213,7 +223,7 @@ CREATE TABLE `subscribe` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `subscribe`
+-- Déchargement des données de la table `subscribe`
 --
 
 INSERT INTO `subscribe` (`id`, `id_user`, `id_streamer`) VALUES
@@ -321,7 +331,7 @@ INSERT INTO `subscribe` (`id`, `id_user`, `id_streamer`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Structure de la table `user`
 --
 
 CREATE TABLE `user` (
@@ -339,7 +349,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `user`
+-- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`id`, `name`, `firstname`, `mail`, `username`, `password`, `description`, `image`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -443,12 +453,14 @@ INSERT INTO `user` (`id`, `name`, `firstname`, `mail`, `username`, `password`, `
 (98, 'Duncan', 'Wanda', 'Proin.dolor.Nulla@bibendum.org', 'Branden', 'libero', 'Lorem ipsum dolor sit amet,', 'malesuada', '0000-00-00 00:00:00', NULL, NULL),
 (99, 'Lester', 'Ciaran', 'nulla@luctussitamet.co.uk', 'Shoshana', 'Integer', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam', 'aliquam', '0000-00-00 00:00:00', NULL, NULL),
 (100, 'Vargas', 'Carla', 'Integer.eu.lacus@adipiscinglacusUt.', 'Nita', 'parturient', 'Lorem ipsum dolor sit amet, consectetuer', 'turpis', '0000-00-00 00:00:00', NULL, NULL),
-(115, 'Benj', 'Mth', 'ben@gmail.com', 'ben', '$2y$10$HCJX86AnzJ.IhAcAUoNfyOyJX/OUwJE3F.Hgfhe53f2Hy3/7yqHJy', '', '', '2021-04-06 10:19:08', '2021-04-06 10:19:08', NULL);
+(115, 'Benj', 'Mth', 'ben@gmail.com', 'ben', '$2y$10$HCJX86AnzJ.IhAcAUoNfyOyJX/OUwJE3F.Hgfhe53f2Hy3/7yqHJy', '', '', '2021-04-06 10:19:08', '2021-04-06 10:19:08', NULL),
+(116, 'Anonyme', 'Anonyme', 'Anonyme@Anonyme.fr', 'Anonyme', '$2y$10$FQN0AW8Tv1vCKl0VgOz9uOePVwn1mc/BEuxfvnnT0DOXfzjmjNwtW', '', '', '2021-04-07 05:23:09', '2021-04-07 05:23:09', NULL),
+(117, 'De Souza', 'Alex', '0', 'alex', '$2y$10$vbAfiJreW43Urz/t8i.8tuCNrrRrwPd1/81Org9KG7r7rlKVni/aO', '', '', '2021-04-07 05:23:50', '2021-04-07 05:23:50', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `video`
+-- Structure de la table `video`
 --
 
 CREATE TABLE `video` (
@@ -465,7 +477,7 @@ CREATE TABLE `video` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `video`
+-- Déchargement des données de la table `video`
 --
 
 INSERT INTO `video` (`id`, `name`, `description`, `status`, `created_at`, `updated_at`, `deleted_at`, `path`, `view`, `id_user`) VALUES
@@ -571,11 +583,11 @@ INSERT INTO `video` (`id`, `name`, `description`, `status`, `created_at`, `updat
 (100, 'pellentesque', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL, 'et', 2147483647, 100);
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `message`
+-- Index pour la table `message`
 --
 ALTER TABLE `message`
   ADD PRIMARY KEY (`id`),
@@ -583,13 +595,13 @@ ALTER TABLE `message`
   ADD KEY `fk2_message_stream` (`id_stream`);
 
 --
--- Indexes for table `notification`
+-- Index pour la table `notification`
 --
 ALTER TABLE `notification`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `private_message`
+-- Index pour la table `private_message`
 --
 ALTER TABLE `private_message`
   ADD PRIMARY KEY (`id`),
@@ -597,14 +609,14 @@ ALTER TABLE `private_message`
   ADD KEY `fk1_private_sendee` (`id_sendee`);
 
 --
--- Indexes for table `stream`
+-- Index pour la table `stream`
 --
 ALTER TABLE `stream`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk1_stream_user` (`id_user`);
 
 --
--- Indexes for table `subscribe`
+-- Index pour la table `subscribe`
 --
 ALTER TABLE `subscribe`
   ADD PRIMARY KEY (`id`),
@@ -612,91 +624,91 @@ ALTER TABLE `subscribe`
   ADD KEY `fk2_streamer` (`id_streamer`);
 
 --
--- Indexes for table `user`
+-- Index pour la table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `video`
+-- Index pour la table `video`
 --
 ALTER TABLE `video`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk1_video_user` (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `message`
+-- AUTO_INCREMENT pour la table `message`
 --
 ALTER TABLE `message`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
--- AUTO_INCREMENT for table `notification`
+-- AUTO_INCREMENT pour la table `notification`
 --
 ALTER TABLE `notification`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `private_message`
+-- AUTO_INCREMENT pour la table `private_message`
 --
 ALTER TABLE `private_message`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
--- AUTO_INCREMENT for table `subscribe`
+-- AUTO_INCREMENT pour la table `subscribe`
 --
 ALTER TABLE `subscribe`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
--- AUTO_INCREMENT for table `video`
+-- AUTO_INCREMENT pour la table `video`
 --
 ALTER TABLE `video`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `message`
+-- Contraintes pour la table `message`
 --
 ALTER TABLE `message`
   ADD CONSTRAINT `fk1_message_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk2_message_stream` FOREIGN KEY (`id_stream`) REFERENCES `stream` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `private_message`
+-- Contraintes pour la table `private_message`
 --
 ALTER TABLE `private_message`
   ADD CONSTRAINT `fk1_private_sendee` FOREIGN KEY (`id_sendee`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk1_private_sender` FOREIGN KEY (`id_sender`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `stream`
+-- Contraintes pour la table `stream`
 --
 ALTER TABLE `stream`
   ADD CONSTRAINT `fk1_stream_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `subscribe`
+-- Contraintes pour la table `subscribe`
 --
 ALTER TABLE `subscribe`
   ADD CONSTRAINT `fk1_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk2_streamer` FOREIGN KEY (`id_streamer`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `video`
+-- Contraintes pour la table `video`
 --
 ALTER TABLE `video`
   ADD CONSTRAINT `fk1_video_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
