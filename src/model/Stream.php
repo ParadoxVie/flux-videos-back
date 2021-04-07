@@ -13,4 +13,9 @@ class Stream extends \Illuminate\Database\Eloquent\Model
     public    $timestamps = true;
     protected $fillable = ['deleted_at'];
     public $incrementing = false;
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class,'id_user')->select(array('id','username','mail'));
+    }
 }
