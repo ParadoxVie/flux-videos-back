@@ -57,24 +57,6 @@ class ControllerStream
         }
     }
 
-    public function deleteStream(Request $req, Response $res, array $args): Response
-    {
-        $id = $args['id'];
-        $stream = Stream::find($id);
-        try {
-            $stream->delete();
-        } catch (\Exception $e) {
-            $res = $res->withStatus(500)
-                ->withHeader('Content-Type', 'application/json');
-            $res->getBody()->write(json_encode($e->getMessage()));
-            return $res;
-        }
-        $res = $res->withStatus(200)
-            ->withHeader('Content-Type', 'application/json');
-        $res->getBody()->write(json_encode("Stream deleted"));
-        return $res;
-    }
-
     public function createStream(Request $req, Response $res, array $args): Response
     {
         //POST

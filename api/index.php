@@ -79,7 +79,6 @@ $app->delete("/stream/{id}[/]", ControllerStream::class . ':deleteStream');
 
 $app->post('/stream[/]', ControllerStream::class.':createStream');
 
-$app->delete('/stream/{id}[/]', ControllerStream::class.':deleteStream');
 // VIDEOS
 
 $app->post('/video[/]', ControllerVideo::class.':sendVideo');
