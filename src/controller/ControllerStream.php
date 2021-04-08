@@ -42,7 +42,9 @@ class ControllerStream
     public function getStream(Request $req, Response $res,array $args): Response
     {
         $id = $args['id'];
-        $stream = Stream::select()->where('id','=',$id)->with('creator')->first();
+        $stream = Stream::select()->where('id','=',$id)->with(['creator'=> function($q){
+            $q->select('id','username','mail','description');
+        }])->first();
         if(!is_null($stream))
         {
             $res = $res->withStatus(200)                     
@@ -54,34 +56,43 @@ class ControllerStream
         {
             $res = $res->withStatus(404)                     
                         ->withHeader('Content-Type','application/json');
-            $res->getBody()->write(json_encode("Stream not Found"));
+            $res->getBody()->write(json_encode(["error" => "Stream not Found"]));
             return $res;
         }
     }
 
     public function createStream(Request $req, Response $res, array $args): Response
     {
-        //POST
-        //Proxy
-        /*$opts = array('http' => array('proxy'=> 'tcp://www-cache.iutnc.univ-lorraine.fr:3128', 'request_fulluri'=> true));
-        $context = stream_context_create($opts)*/
         $uuid1 = Uuid::uuid1();
-        $str = json_decode(file_get_contents("http://ip-api.com/json"));
         $stream = new Stream();
         $infos = json_decode($req->getBody());//Recuperation des infos
         $stream->id = $uuid1;
-        $stream->title = filter_var($infos->title,FILTER_SANITIZE_SPECIAL_CHARS);
+        $stream->title = filter_var($infos->title,FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
         $stream->visibility = $infos->visibility;
         $stream->anonymous = $infos->anonymous;
         $stream->urgency = $infos->urgency;
-        $stream->latitude = $str->lat;
-        $stream->longitude = $str->lon;
+        $stream->latitude = $infos->latitude;
+        $stream->longitude = $infos->longitude;
         //122
         if(is_null($infos->username))
-            $stream->id_user = 122;
+            $stream->id_user = 116;
         else
-            $stream->id_user = User::where('username','=',$infos->username)->first()->id;
-
+        {
+            try
+            {
+                $stream->id_user = User::where('username','=',$infos->username)->firstOrFail()->id;
+            }
+            catch(ModelNotFoundException $e)
+            {
+                $res = $res->withStatus(404)
+                            ->withHeader('Content-Type','application/json');
+                $res->getBody()->write(json_encode(["error" => "User Not Found"]));
+                return $res;
+            }
+            
+        }
+            
+        //Save du Stream
         try
         {
             $stream->save();
@@ -100,7 +111,7 @@ class ControllerStream
             [
                 'id' => $stream->id,
                 'title' => $stream->title,
-                "visibilty" => $stream->visibilty,
+                "visibility" => $stream->visibility,
                 "id_user" => $stream->id_user,
                 "latitude" => $stream->latitude,
                 "longitude" => $stream->longitude,
@@ -122,7 +133,7 @@ class ControllerStream
         {
             $res = $res->withStatus(404)
                         ->withHeader('Content-Type','application/json');
-            $res->getBody()->write(json_encode("Stream Not Found"));
+            $res->getBody()->write(json_encode(["error" => "Stream Not Found"]));
             return $res;
         }
 

@@ -2,7 +2,9 @@
 namespace projet\controller;
 use\Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use Slim\http\Stream;
 use \projet\model\Video;
+use \projet\model\Stream as streaming;
 class ControllerVideo
 {
     protected $c;
@@ -19,26 +21,45 @@ class ControllerVideo
 
     public function getVideo(Request $req, Response $res, array $args): Response
     {
-            
+        try
+        {
+            $video = Video::where('name','=',$args['id'])->firstOrFail();
+        }
+        catch(ModelNotFoundException $e)
+        {
+            $res = $res->withStatus(404)
+                        ->withHeader('Content-Type','application/json');
+            $res->getBody()->write(json_encode(["error" => "Video Not Found"]));
+            return $res;
+        }
+        $file = fopen($video->path,'r');
+        $file_stream = new Stream($file);
+        $res = $res->withStatus(200)
+                    ->withHeader('Content-Type', 'video/mpeg')
+                    ->withHeader('Content-length', filesize($file))
+                    ->withBody($file_stream);
+        return $res;
     }
 
     public function sendVideo(Request $req, Response $res): Response
     {
         $body = $req->getParsedBody();
         $uploadedFile = $req->getUploadedFiles();
+        $stream = streaming::select('id','id_user')->where('id','=',$body['id_stream'])->withTrashed()->first();
         $file = $uploadedFile['data']->file;
-        rename($file,'..\videos\\'.bin2hex(random_bytes(8)).'.mpeg');
-        $res = $res->withStatus(200)
-                ->withHeader('Content-Type','application/json');
-        $res->getBody()->write(json_encode($uploadedFile));
-        return $res;
+        $uuidVideo = $stream->id;
+        rename($file,'..\videos\\'.$uuidVideo.'.webm');
         $video = new Video;
-        $video->name = $body->idStream.'video';
+        $video->name = $uuidVideo;
         $video->description = '';
-        $video->status = $body->status;
-        $video->path = '/video'.$video->name.'.mpg';
+        if($body['status']=="true")
+            $video->status = true;
+        else
+            $video->status = false;
+        $video->path = '../videos/'.$uuidVideo.'.webm';
         $video->view = 0;
-        $video->id_user = 1;
+        //ajouter where pour id_user
+        $video->id_user = $stream->id_user;
         try
         {
             $video->save();
@@ -66,7 +87,7 @@ class ControllerVideo
         $video = Video::where('id','=',$id)->first();
         try
         {
-            $user->delete();
+            $video->delete();
         }
         catch(\Exception $e)
         {

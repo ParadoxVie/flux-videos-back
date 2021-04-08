@@ -8,7 +8,7 @@ class Stream extends \Illuminate\Database\Eloquent\Model {
     protected $table = 'stream';
     protected $primaryKey = 'id';
     public    $timestamps = true;
-    protected $fillable = ['deleted_at'];
+    protected $hidden = ['deleted_at','updated_at'];
     public $incrementing = false;
 
     public function creator()

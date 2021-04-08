@@ -58,15 +58,19 @@ $app->get("/home[/]", ControllerStream::class.':home');
 //////////////////////////////////////////////////////////////////////////////////
 
 // MEMBRE
-$app->get("/user/{id}", ControllerUser::class.':getUserProfile');
+$app->get("/user/{id}[/]", ControllerUser::class.':getUserProfile');
 
-$app->put("/user/{id}", ControllerUser::class.':modifProfile')
+$app->get("/user/{id}/videos[/]", ControllerUser::class.':getUserVideos')
+    ->add(CheckAuthorization::class.':checkAuthorization')
+    ->add(CheckToken::class.':checkToken');
+$app->put("/user/{id}[/]", ControllerUser::class.':modifProfile')
     ->add(CheckAuthorization::class.':checkAuthorization')
     ->add(CheckToken::class.':checkToken');
 $app->post("/user", ControllerUser::class.':createUser');
 
-$app->delete("/user", ControllerUser::class.':deleteUser');
-
+$app->delete("/user", ControllerUser::class.':deleteUser')
+    ->add(CheckAuthorization::class.':checkAuthorization')
+    ->add(CheckToken::class.':checkToken');
 $app->post("/signIn", ControllerUser::class.':signIn')
     ->add(CheckAuthorization::class.':checkAuthorization');
 
@@ -81,9 +85,8 @@ $app->delete('/stream/{id}[/]', ControllerStream::class.':deleteStream');
 // VIDEOS
 
 $app->post('/video[/]', ControllerVideo::class.':sendVideo');
-/*$app->get("/video", function (Request $rq, Response $resp): Response {
-});
-
+$app->get('/video/{id}[/]', ControllerVideo::class.':getVideo');
+/*
 $app->get("/subs", function (Request $rq, Response $resp): Response {
 });
 

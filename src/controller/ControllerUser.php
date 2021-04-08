@@ -19,22 +19,24 @@ class ControllerUser
 
     public function getUserProfile(Request $req, Response $res,array $args): Response
     {
-        $id = $args['id'];
-        $user = User::select('username','description','image')->where('id','=',$id)->first();
-        if(!is_null($user))
+        try
         {
-            $res = $res->withStatus(200)                     
-                        ->withHeader('Content-Type','application/json');
-            $res->getBody()->write($user);
-            return $res;
+            $user = User::select('name','firstname','username','mail','description')->where('id','=',$args['id'])->firstOrFail();
         }
-        else
+        catch(ModelNotFoundException $e)
         {
             $res = $res->withStatus(404)                     
                         ->withHeader('Content-Type','application/json');
-            $res->getBody()->write(json_encode("User Not Found"));
+            $res->getBody()->write(json_encode(["error" => "User Not Found"]));
             return $res;
         }
+        $res = $res->withStatus(200)                     
+                    ->withHeader('Content-Type','application/json');
+        $res->getBody()->write(json_encode([
+            "type" => "resources",
+            "user" => $user
+        ]));
+        return $res;
     }
 
     public function createUser(Request $req, Response $res,array $args): Response
@@ -47,7 +49,6 @@ class ControllerUser
         $user->username = filter_var($body->username,FILTER_SANITIZE_SPECIAL_CHARS);
         $user->password = password_hash($body->password,PASSWORD_DEFAULT);
         $user->description = '';
-        $user->image = '';
         try
         {
             $user->save();
@@ -66,13 +67,57 @@ class ControllerUser
     }
 
     public function modifProfile(Request $req, Response $res,array $args): Response
-    {
-
-    }
-
-    public function getMemberVideos(Request $req, Response $res,array $args): Response
-    {
-
+    {       
+        if($args['id']==$req->getAttribute('token')->id)
+        {
+            try
+            {
+                $user = User::select('id','username','description','mail')->where('id','=',$args['id'])->firstOrFail();
+            }
+            catch(ModelNotFoundException $e)
+            {
+                $res = $res->withStatus(404)                     
+                            ->withHeader('Content-Type','application/json');
+                $res->getBody()->write(json_encode(["error" => "User Not Found"]));
+                return $res;
+            }
+            $body = $req->getParsedBody();
+            $user->description = filter_var($body['description'],FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
+            $user->username = filter_var($body['username'],FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
+            try
+            {
+                $user->save();
+            }
+            catch(ModelNotFoundException $e)
+            {
+                $res = $res->withStatus(500)
+                            ->withHeader('Content-Type','application/json');
+                $res->getBody()->write(json_encode($e->getmessage()));
+                return $res;
+            }
+        }
+        else
+        {
+            $res = $res->withStatus(403)                     
+                        ->withHeader('Content-Type','application/json');
+            $res->getBody()->write(json_encode(["error" => "You are not allowed to do that"]));
+            return $res;
+        }
+        $token = JWT::encode([
+            'iss' => 'http://localhost:8080/api/user',
+            'aud' => 'http://localhost:8080',
+            'iat' => time(),
+            'exp' => time()+60*60*24,
+            'username' => $user->username,
+            'description' => $user->description,
+            'email' => $user->mail,
+            'id' => $user->id
+        ],
+        $this->c->settings['secrets'], 'HS512');
+        $res = $res->withStatus(200)                     
+                    ->withHeader('Content-Type','application/json');
+        $res->getBody()->write(json_encode(["success" => "Profile has been updated","token"=>$token]));
+        return $res;
     }
 
     public function deleteMember(Request $req, Response $res,array $args): Response
@@ -101,7 +146,7 @@ class ControllerUser
         list($user,$pass) = explode(':',$authString);
         try
         {
-            $user = User::select('mail','username','password')->where('username','=',$user)->firstorFail();
+            $user = User::select('id','mail','username','password','description')->where('username','=',$user)->firstorFail();
 
             if(!password_verify($pass, $user->password))
             {
@@ -126,13 +171,37 @@ class ControllerUser
             'iat' => time(),
             'exp' => time()+60*60*24,
             'username' => $user->username,
-            'email' => $user->mail
+            'description' => $user->description,
+            'email' => $user->mail,
+            'id' => $user->id
         ],
         $this->c->settings['secrets'], 'HS512');
 
         $res = $res->withStatus(200)
                     ->withHeader('Content-Type','application/json');
         $res->getBody()->write(json_encode($token));
+        return $res;
+    }
+
+    public function getUserVideos(Request $req, Response $res,array $args): Response
+    {
+        try
+        {
+            $user = User::where('id','=',$args['id'])->with('videos')->firstOrFail();
+        }
+        catch(ModelNotFoundException $e)
+        {
+            $res = $res->withStatus(404)
+                        ->withHeader('Content-Type','application/json');
+            $res->getBody()->write(json_encode(['error'=> 'User not Found']));
+            return $res;
+        }
+        $res = $res->withStatus(200)
+                ->withHeader('Content-Type','application/json');
+        $res->getBody()->write(json_encode([
+            "type" => "collections",
+            "user" =>$user
+        ]));
         return $res;
     }
 }
