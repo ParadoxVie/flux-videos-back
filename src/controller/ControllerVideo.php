@@ -35,7 +35,7 @@ class ControllerVideo
         $file = fopen($video->path,'r');
         $file_stream = new Stream($file);
         $res = $res->withStatus(200)
-                    ->withHeader('Content-Type', 'video/mpeg')
+                    ->withHeader('Content-Type', 'video/webm')
                     ->withHeader('Content-length', filesize($file))
                     ->withBody($file_stream);
         return $res;
